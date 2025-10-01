@@ -311,6 +311,37 @@ train_args:
       LSST_DZ_S5: 0.0
       LSST_A1_1: 0.5
       LSST_A1_2: 0.0
+sampler:
+  evaluate:
+    N: 1
+    override:
+      As_1e9: 2.1
+      ns: 0.96605
+      H0: 67.32
+      omegab: 0.04
+      omegam: 0.3
+      mnu: 0.06
+      w0pwa: -0.9
+      w: -0.9
+      LSST_DZ_S1: 0.0414632
+      LSST_DZ_S2: 0.00147332
+      LSST_DZ_S3: 0.0237035
+      LSST_DZ_S4: -0.0773436
+      LSST_DZ_S5: -8.67127e-05
+      LSST_M1: 0.0191832
+      LSST_M2: -0.0431752
+      LSST_M3: -0.034961
+      LSST_M4: -0.0158096
+      LSST_M5: -0.0158096
+      LSST_A1_1: 0.606102
+      LSST_A1_2: -1.51541
+      LSST_A2_1: 0.0
+      LSST_A2_2: -1.51541
+      LSST_BTA_1: 0.0
+      #LSST_A2_1: -0.852658
+      #LSST_A2_2: -2.63433
+      #LSST_BTA_1: 1.01257
+
 
 
 output: ./projects/des_y3/chains/MCMC1
