@@ -293,58 +293,53 @@ theory:
 
 train_args:
   # this block becomes the theory block AFTER training
-  #cosmic_shear:
-    #path: ./cobaya/cobaya/theories/
-    #stop_at_error: True
-    #extra_args: 
-      #device: 'cpu'
-      #file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
-      #extra: ['./projects/lsst_y1/emulators/xi_high_accuracy.h5']
-      #ord: [['As_1e9','ns','H0','omegab', 'omegam',
-        #'LSST_DZ_S1','LSST_DZ_S2','LSST_DZ_S3','LSST_DZ_S4','LSST_DZ_S5',
-        #'LSST_A1_1','LSST_A1_2']]
-      #fast_params: [['LSST_M1','LSST_M2','LSST_M3','LSST_M4','LSST_M5']]
-      #extrapar: [{'MLA': 'MLP', 
-        #'INT_DIM_RES': 256, 
-        #'OUTPUT_DIM': 780}]
-      # extrapar: [{'MLA': 'TRF', 
-      #   'INT_DIM_RES': 256, 
-      #   'INT_DIM_TRF': 1024, 
-      #   'NC_TRF': 32, 
-      #   'OUTPUT_DIM': 780}]
+  cosmic_shear:
+    path: ./cobaya/cobaya/theories/
+    stop_at_error: True
+    extra_args: 
+      device: 'cpu'
+      file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
+      extra: ['./projects/lsst_y1/emulators/xi_high_accuracy.h5']
+      ord: [['As_1e9','ns','H0','omegab', 'omegam',
+        'LSST_DZ_S1','LSST_DZ_S2','LSST_DZ_S3','LSST_DZ_S4','LSST_DZ_S5',
+        'LSST_A1_1','LSST_A1_2']]
+      fast_params: [['LSST_M1','LSST_M2','LSST_M3','LSST_M4','LSST_M5']]
+      extrapar: [{'MLA': 'MLP', 
+        'INT_DIM_RES': 256, 
+        'OUTPUT_DIM': 780}]
+      parameter_covmat_file: './projects/lsst_y1/chains/MCMC1.covmat' # must have a header like cobaya MCMC output.
+      data_covmat_file: './projects/lsst_y1/data/lsst_y1_cov'  # same one as for cobaya
+      training_data_path: '/home/grads/extra_data/evan/transfer_learning_data/'
+    
+      n_train: 10000 
+      t_train: 16
+      train_datavectors_file: 'train_datavectors_high_accuracy.npy'
+      train_parameters_file:  'train_parameters_high_accuracy.txt'
+    
+      n_valid: 1000
+      t_valid: 8
+      valid_datavectors_file: 'valid_datavectors_high_accuracy.npy'
+      valid_parameters_file:  'valid_parameters_high_accuracy.txt'
+    
+      n_test:  1000
+      t_test:  8
+      test_datavectors_file:  'test_datavectors_high_accuracy.npy'
+      test_parameters_file:   'test_parameters_high_accuracy.txt'
+    
+      fiducial:       
+          As_1e9: 2.1
+          ns: 0.96
+          H0: 67.0
+          omegab: 0.05
+          omegam: 0.33
+          LSST_DZ_S1: 0.0
+          LSST_DZ_S2: 0.0
+          LSST_DZ_S3: 0.0
+          LSST_DZ_S4: 0.0
+          LSST_DZ_S5: 0.0
+          LSST_A1_1: 0.5
+          LSST_A1_2: 0.0
 
-  #parameter_covmat_file: './projects/lsst_y1/chains/MCMC1.covmat' # must have a header like cobaya MCMC output.
-  #data_covmat_file: './projects/lsst_y1/data/lsst_y1_cov'  # same one as for cobaya
-  #training_data_path: '/home/grads/extra_data/evan/transfer_learning_data/'
-
-  #n_train: 10000 
-  #t_train: 16
-  #train_datavectors_file: 'train_datavectors_high_accuracy.npy'
-  #train_parameters_file:  'train_parameters_high_accuracy.txt'
-
-  #n_valid: 1000
-  #t_valid: 8
-  #valid_datavectors_file: 'valid_datavectors_high_accuracy.npy'
-  #valid_parameters_file:  'valid_parameters_high_accuracy.txt'
-
-  #n_test:  1000
-  #t_test:  8
-  #test_datavectors_file:  'test_datavectors_high_accuracy.npy'
-  #test_parameters_file:   'test_parameters_high_accuracy.txt'
-
-  #fiducial:       
-      #As_1e9: 2.1
-      #ns: 0.96
-      #H0: 67.0
-      #omegab: 0.05
-      #omegam: 0.33
-      #LSST_DZ_S1: 0.0
-      #LSST_DZ_S2: 0.0
-      #LSST_DZ_S3: 0.0
-      #LSST_DZ_S4: 0.0
-      #LSST_DZ_S5: 0.0
-      #LSST_A1_1: 0.5
-      #LSST_A1_2: 0.0
 
 sampler:
   evaluate:
