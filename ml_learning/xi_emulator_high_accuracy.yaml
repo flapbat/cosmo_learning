@@ -229,20 +229,20 @@ params:
     latex: \Omega_\mathrm{\\nu}
 
 theory:
-  #emul_cosmic_shear:
-    #path: ./cobaya/cobaya/theories/
-    #stop_at_error: True
-    #extra_args: 
-      #device: 'cpu'
-      #file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
-      #extra: ['./projects/lsst_y1/emulators/xi_high_accuracy.h5']
-      #ord: [['As_1e9','ns','H0','omegab', 'omegam',
-        #'LSST_DZ_S1','LSST_DZ_S2','LSST_DZ_S3','LSST_DZ_S4','LSST_DZ_S5',
-        #'LSST_A1_1','LSST_A1_2']]
-      #fast_params: [['LSST_M1','LSST_M2','LSST_M3','LSST_M4','LSST_M5']]
-      #extrapar: [{'MLA': 'MLP', 
-        #'INT_DIM_RES': 256, 
-        #'OUTPUT_DIM': 780}]
+  emul_cosmic_shear:
+    path: ./cobaya/cobaya/theories/
+    stop_at_error: True
+    extra_args: 
+      device: 'cpu'
+      file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
+      extra: ['./projects/lsst_y1/emulators/xi_high_accuracy.h5']
+      ord: [['As_1e9','ns','H0','omegab', 'omegam',
+        'LSST_DZ_S1','LSST_DZ_S2','LSST_DZ_S3','LSST_DZ_S4','LSST_DZ_S5',
+        'LSST_A1_1','LSST_A1_2']]
+      fast_params: [['LSST_M1','LSST_M2','LSST_M3','LSST_M4','LSST_M5']]
+      extrapar: [{'MLA': 'MLP', 
+        'INT_DIM_RES': 256, 
+        'OUTPUT_DIM': 780}]
   camb:
     path: ./external_modules/code/CAMB
     use_renames: True
