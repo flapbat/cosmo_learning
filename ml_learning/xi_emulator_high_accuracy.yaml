@@ -232,6 +232,7 @@ theory:
   emul_cosmic_shear:
     path: ./cobaya/cobaya/theories/
     stop_at_error: True
+    debug: True
     extra_args: 
       device: 'cpu'
       file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
