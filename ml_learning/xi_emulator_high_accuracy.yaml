@@ -6,6 +6,7 @@ likelihood:
   lsst_y1.cosmic_shear:
     path: ./external_modules/data/lsst_y1
     data_file: lsst_y1_train.dataset
+    debug: True
     print_datavector: True
     print_datavector_file: "./projects/lsst_y1/chains/high_accuracy1_lsst_y1_theory.modelvector"
     accuracyboost: 4.0
@@ -232,7 +233,6 @@ theory:
   emul_cosmic_shear:
     path: ./cobaya/cobaya/theories/
     stop_at_error: True
-    debug: True
     extra_args: 
       device: 'cpu'
       file: ['./projects/lsst_y1/emulators/xi_high_accuracy']
