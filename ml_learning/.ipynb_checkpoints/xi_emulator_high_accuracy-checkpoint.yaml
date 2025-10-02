@@ -291,7 +291,7 @@ theory:
 
 # need to add the emulator part
 
-#train_args:
+train_args:
   # this block becomes the theory block AFTER training
   #cosmic_shear:
     #path: ./cobaya/cobaya/theories/
