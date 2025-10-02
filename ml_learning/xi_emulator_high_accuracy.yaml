@@ -295,5 +295,18 @@ train_args:
       LSST_A1_1: 0.5
       LSST_A1_2: 0.0
 
+sampler:
+  evaluate:
+    override:
+      logA: 3.0448
+      ns: 0.96605
+      theta_MC_100: 1.04088
+      omegabh2: 0.022383
+      omegach2: 0.12011
+      tau: 0.0543
+      w0pwa: -0.968859
+      w: -0.909098
+      A_planck: 1.00138
+
 
 output: ./projects/des_y3/chains/MCMC1
