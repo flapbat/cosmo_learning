@@ -228,7 +228,7 @@ params:
     latex: \Omega_\mathrm{\\nu}
 
 theory:
-  cosmic_shear:
+  emul_cosmic_shear:
     path: ./cobaya/cobaya/theories/
     stop_at_error: True
     extra_args: 
@@ -355,4 +355,4 @@ sampler:
       LSST_A1_1: 0.606102
       LSST_A1_2: -1.51541
 
-output: ./projects/des_y3/chains/MCMC1
+output: ./projects/lsst_y1/chains/MCMC1
