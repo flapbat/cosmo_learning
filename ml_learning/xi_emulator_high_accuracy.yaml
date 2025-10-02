@@ -7,7 +7,7 @@ likelihood:
     path: ./external_modules/data/lsst_y1
     data_file: lsst_y1_train.dataset
     print_datavector: True
-    print_datavector_file: "./projects/lsst_y1/projects/highhaccuracy_lsst_y1_theory.modelvector"
+    print_datavector_file: "./projects/lsst_y1/chains/highhaccuracy_lsst_y1_theory.modelvector"
     accuracyboost: 4.0
     integration_accuracy: 1.0
     kmax_boltzmann: 5.0
