@@ -146,6 +146,26 @@ def progress_bar(train_loss, valid_loss, start_time, epoch, total_epochs, optim)
 #===================================================================================================
 # training routine
 
+def chichi():
+    Y_t = model(x_test.to(device))
+    delta_chi2 = torch.diag((y_test.to(device) - Y_t) @ torch.t(y_test.to(device) - Y_t))
+
+    chi2_g_1  = 0
+    chi2_g_p2 = 0
+
+    for c in delta_chi2:
+        if( c>0.2 and c<1 ):
+            chi2_g_p2 += 1
+        elif( c>=1 ):
+            chi2_g_1 += 1
+
+    meanchi2=torch.mean(delta_chi2).cpu().detach().numpy()
+    medianchi2=torch.median(delta_chi2).cpu().detach().numpy()
+    np.savetxt("chi2.txt", np.array([meanchi2,medianchi2,chi2_g_p2, chi2_g_1],dtype=np.float64))
+
+
+
+
 def train_emulator(train_yaml, probe,
             n_epochs=250, batch_size=32, learning_rate=1e-3, weight_decay=0, 
             save_losses=False):
@@ -372,6 +392,7 @@ def train_emulator(train_yaml, probe,
             optim.zero_grad()
 
         progress_bar(losses_train[-1],losses_valid[-1],train_start_time, e, n_epochs, optim)
+        chichi()
     
     if ( save_losses ):
         np.savetxt("losses.txt", np.array([losses_train,losses_valid],dtype=np.float64))

@@ -1,27 +1,21 @@
 timing: True
 debug: False
-stop_at_error: True
+stop_at_error: False
 
 likelihood:
   lsst_y1.cosmic_shear:
     path: ./external_modules/data/lsst_y1
-    data_file: lsst_y1_M1_GGL0.05.dataset   # 705 non-masked elements  (EE2 delta chi^2 ~ 11.8)
-    #data_file: lsst_y1_M2_GGL0.05.dataset  # 600 non-masked elements  (EE2 delta chi^2 ~ 6.7)
-    #data_file: lsst_y1_M3_GGL0.05.dataset  # 495 non-masked elements  (EE2 delta chi^2 ~ 3.2)
-    #data_file: lsst_y1_M4_GGL0.05.dataset  # 405 non-masked elements  (EE2 delta chi^2 ~ 1.4)
-    #data_file: lsst_y1_M5_GGL0.05.dataset  # 315 non-masked elements  (EE2 delta chi^2 ~ 0.5)
-    #data_file: lsst_y1_M6_GGL0.05.dataset  # 780 non-masked elements  (EE2 delta chi^2 ~ 12.96)
+    data_file: lsst_y1_train.dataset
     print_datavector: True
-    print_datavector_file: "./projects/lsst_y1/chains/example1_lsst_y1_theory.modelvector"
-    accuracyboost: 1.0
-    integration_accuracy: 0
-    lmax: 50000 # lmax computed for real space correlation function
+    print_datavector_file: "./projects/lsst_y1/chains/highhaccuracy_lsst_y1_emul.modelvector"
+    accuracyboost: 4.0
+    integration_accuracy: 1.0
     kmax_boltzmann: 5.0
-    # 1 EE2, 2 Halofit
+    # 1 EE2, 2 Halofit, 3 EFT
     non_linear_emul: 2
     IA_model: 0
     IA_redshift_evolution: 3
-    
+
 params:
   As_1e9:
     prior:
@@ -77,43 +71,119 @@ params:
     proposal: 0.02
     latex: \Omega_\mathrm{m}
     drop: true
-  mnu:
-    prior:
-      min: 0.06
-      max: 0.6
-    ref:
-      dist: norm
-      loc: 0.25
-      scale: 0.1
-    proposal: 0.05
   w0pwa:
-    prior:
-      min: -5 
-      max: -0.01
-    ref:
-      dist: norm
-      loc: -0.99
-      scale: 0.05
-    proposal: 0.05
-    latex: w_{0,\mathrm{DE}}+w_{a,\mathrm{DE}}
-    drop: true
+    value: -1.0
   w:
-    prior:
-      min: -3
-      max: -0.01
-    ref:
-      dist: norm
-      loc: -0.99
-      scale: 0.05
-    proposal: 0.05
-    latex: w_{0,\mathrm{DE}}
+    value: -1.0
+  mnu:
+    value: 0.06
   tau:
     value: 0.0697186
     latex: \tau_\mathrm{reio}
+  # ----------------------------------------------------------------------------
+  # LSST-Y3 CS nuissance parameter Start
+  # ----------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
+  # LSST-Y3 SOURCE VALUES FROM TABLE I, PAGE 11 of 2105.13549
+  # ----------------------------------------------------------------------------
+  LSST_DZ_S1:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.018
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.018
+    proposal: 0.005
+    latex: \Delta z_\mathrm{s,LSST}^1
+  LSST_DZ_S2:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.015
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.015
+    proposal: 0.005
+    latex: \Delta z_\mathrm{s,LSST}^2
+  LSST_DZ_S3:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.011
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.011
+    proposal: 0.005
+    latex: \Delta z_\mathrm{s,LSST}^3
+  LSST_DZ_S4:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.017
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.017
+    proposal: 0.005
+    latex: \Delta z_\mathrm{s,LSST}^4
+  LSST_DZ_S5:
+    prior:
+      dist: norm
+      loc: 0.0
+      scale: 0.017
+    ref:
+      dist: norm
+      loc: 0.0
+      scale: 0.017
+    proposal: 0.005
+    latex: \Delta z_\mathrm{s,LSST}^5
+  LSST_M1:
+    value: 0.0
+  LSST_M2:
+    value: 0.0
+  LSST_M3:
+    value: 0.0
+  LSST_M4:
+    value: 0.0
+  LSST_M5:
+    value: 0.0
+  LSST_A1_1:
+    prior:
+      min: -5
+      max:  5
+    ref:
+      dist: norm
+      loc: 0.7
+      scale: 0.5
+    proposal: 0.5
+    latex: A_\mathrm{1-IA,LSST}^1
+  LSST_A1_2:
+    prior:
+      min: -5
+      max:  5
+    ref:
+      dist: norm
+      loc: -1.7
+      scale: 0.5
+    proposal: 0.5
+    latex: A_\mathrm{1-IA,LSST}^2
+  LSST_A2_1:
+    value: 0
+  LSST_A2_2:
+    value: 0
+  LSST_BTA_1:
+    value: 0
+  # ----------------------------------------------------------------------------
+  # LSST-Y3 CS nuissance parameter End
+  # ----------------------------------------------------------------------------
   # ---------------------------------------------------------------------------------------
   # ------------------------------------- DERIVED PARAMETERS ------------------------------
   # ---------------------------------------------------------------------------------------
-  # WARNING: DO NOT REMOVE omegabh2/omegach2/omegamh2/wa/As/ FROM DERIVED PARAMETERS
+  # WARNING: DO NOT REMOVE omegabh2/omegach2/omegamh2/wa FROM DERIVED PARAMETERS
   # WARNING: DO NOT REMOVE THE DROP FLAG FROM omegab/omegam/As_1e9/w0pwa
   # SEE: github.com/CosmoLike/cocoa#warning-warning-warning-weak-lensing-yaml-files-in-cobaya-
   # --------------------------------------------------------------------------------------- 
@@ -156,49 +226,22 @@ params:
   omegan:
     derived: 'lambda omegan2, H0: omegan2/((H0/100)**2)'
     latex: \Omega_\mathrm{\\nu}
-  LSST_A2_1:
-    prior:
-      min: -5
-      max:  5
-    ref:
-      dist: norm
-      loc: -1.36
-      scale: 0.5
-    proposal: 0.5
-    latex: A_\mathrm{2-IA,LSST}^1
-  LSST_A2_2:
-    prior:
-      min: -5
-      max:  5
-    ref:
-      dist: norm
-      loc: -2.5
-      scale: 0.5
-    proposal: 0.5
-    latex: A_\mathrm{2-IA,LSST}^2
-  LSST_BTA_1:
-    prior:
-      min: 0
-      max: 2
-    ref:
-      dist: norm
-      loc: 1
-      scale: 0.15
-    proposal: 0.1
-    latex: A_\mathrm{BTA-IA,LSST}^1
 
 theory:
-  camb:
-    path: ./external_modules/code/CAMB
-    stop_at_error: False
-    use_renames: True
+  emul_cosmic_shear:
+    path: ./cobaya/cobaya/theories/
+    stop_at_error: True
     extra_args:
-      halofit_version: takahashi
-      AccuracyBoost: 1.0
-      dark_energy_model: ppf
-      accurate_massive_neutrino_transfers: false
-      k_per_logint: 10
-      kmax: 5.0
+        device: 'cuda'
+        file: ['projects/lsst_y1/emulators/xi_high_accuracy']
+        extra: ['projects/lsst_y1/emulators/xi_high_accuracy.h5']
+        ord:   [['logA','ns','H0','omegabh2','omegach2',
+               'LSST_DZ_S1','LSST_DZ_S2','LSST_DZ_S3','LSST_DZ_S4','LSST_DZ_S5',
+               'LSST_A1_1','LSST_A1_2']]
+        extrapar: [{'MLA': 'TRF', 'INT_DIM_RES': 256, 'INT_DIM_TRF': 1024, 'NC_TRF': 32, 'OUTPUT_DIM': 780}]
+
+
+
 
 sampler:
   evaluate:
@@ -209,26 +252,12 @@ sampler:
       H0: 67.32
       omegab: 0.04
       omegam: 0.3
-      mnu: 0.06
-      w0pwa: -0.9
-      w: -0.9
       LSST_DZ_S1: 0.0414632
       LSST_DZ_S2: 0.00147332
       LSST_DZ_S3: 0.0237035
       LSST_DZ_S4: -0.0773436
       LSST_DZ_S5: -8.67127e-05
-      LSST_M1: 0.0191832
-      LSST_M2: -0.0431752
-      LSST_M3: -0.034961
-      LSST_M4: -0.0158096
-      LSST_M5: -0.0158096
       LSST_A1_1: 0.606102
       LSST_A1_2: -1.51541
-      LSST_A2_1: 0.0
-      LSST_A2_2: -1.51541
-      LSST_BTA_1: 0.0
-      #LSST_A2_1: -0.852658
-      #LSST_A2_2: -2.63433
-      #LSST_BTA_1: 1.01257
 
-output: ./projects/lsst_y1/chains/EXAMPLE_EVALUATE1
+output: ./projects/lsst_y1/chains/MCMC1
