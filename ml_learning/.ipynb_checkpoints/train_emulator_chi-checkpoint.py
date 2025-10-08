@@ -161,10 +161,7 @@ def chichi(m, x_test, y_test, device):
 
     meanchi2=torch.mean(delta_chi2).cpu().detach().numpy()
     medianchi2=torch.median(delta_chi2).cpu().detach().numpy()
-    np.savetxt("chi2.txt", np.array([meanchi2,medianchi2,chi2_g_p2, chi2_g_1],dtype=np.float64))
-
-
-
+    return meanchi2,medianchi2,chi2_g_p2, chi2_g_1
 
 def train_emulator(train_yaml, probe,
             n_epochs=250, batch_size=32, learning_rate=1e-3, weight_decay=0, 
@@ -367,6 +364,8 @@ def train_emulator(train_yaml, probe,
 
         losses_train.append(np.mean(losses))
 
+        meanchi2s,medianchi2s,chi2_g_p2s, chi2_g_1s = [],[],[],[]
+
         ###validation loss
         losses=[]
         with torch.no_grad():
@@ -392,7 +391,13 @@ def train_emulator(train_yaml, probe,
             optim.zero_grad()
 
         progress_bar(losses_train[-1],losses_valid[-1],train_start_time, e, n_epochs, optim)
-        chichi(model, x_test, y_test, device)
+        meanchi2,medianchi2,chi2_g_p2, chi2_g_1 = chichi(model, x_test, y_test, device)
+        meanchi2s.append(meanchi2)
+        medianchi2s.append(medianchi2)
+        chi2_g_p2s.append(chi2_g_p2)
+        chi2_g_1s.append(chi2_g_1)
+    
+    np.savetxt("chi2.txt", np.array([meanchi2s,medianchi2s,chi2_g_p2s, chi2_g_1s],dtype=np.float64))
     
     if ( save_losses ):
         np.savetxt("losses.txt", np.array([losses_train,losses_valid],dtype=np.float64))
