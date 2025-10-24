@@ -396,7 +396,7 @@ def train_emulator(train_yaml, probe,
         medianchi2s.append(medianchi2)
         chi2_g_p2s.append(chi2_g_p2)
         chi2_g_1s.append(chi2_g_1)
-    
+    print(meanchis)
     np.savetxt("chi2.txt", np.array([meanchi2s,medianchi2s,chi2_g_p2s, chi2_g_1s],dtype=np.float64))
     
     if ( save_losses ):
